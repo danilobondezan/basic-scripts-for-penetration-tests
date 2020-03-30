@@ -1,0 +1,10 @@
+wp-content
+blog
+admin
+backup
+bkp
+teste
+index.html
+acesso.txt
+robots.txt
+*.jpg
