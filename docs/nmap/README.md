@@ -2,23 +2,31 @@ SCANNING com NMAP
 
 FLAGS TCP
 
-- SYN - synchronize
-- ACK - acknowledgement
-- SYN-ACK
-- FIN - finalize
-- RST - RESET
+```
+SYN - synchronize
+ACK - acknowledgement
+SYN-ACK
+FIN - finalize
+RST - RESET
+```
 
+# Tipos de port scan com nmap (tcp connect e half open scan)
 
-tipos de port scan com nmap (tcp connect e half open scan)
+```
+nmap -sT -p 80 -Pn 192.168.1
+```
+- sT usa tcp connect, realiza todo o threway handshake e pode ser descoberto facilmente por IPSs e IDSs (envia 6 pacotes SYN recebe SYN/ACK, ACK, RST/ACK e RST
 
-- nmap -sT -p 80 -Pn 192.168.1 > sT usa tcp connect, realiza todo o threway handshake e pode ser descoberto facilmente por IPSs e IDSs (envia 6 pacotes SYN recebe SYN/ACK, ACK, RST/ACK e RST
+```
+- nmap -sS -p 80 -Pn 192.168.1
+```
 
-- nmap -sS -p 80 -Pn 192.168.1 > sS usa half open scan, realiza apenas o inicio de um threway handshake, e é mais difícil de ser descoberto, pois assim que descobre se o destino está vivo ou aberto, finaliza a conexão (envia apenas 3 pacotes, SYN, recebe SYN/ACK e logo envia um RST para finalixar a conexão.
+- sS usa half open scan, realiza apenas o inicio de um threway handshake, e é mais difícil de ser descoberto, pois assim que descobre se o destino está vivo ou aberto, finaliza a conexão (envia apenas 3 pacotes, SYN, recebe SYN/ACK e logo envia um RST para finalixar a conexão.
 
 
 ## nmap
 
-opções default, que precisamos conhecer
+Opções default, que precisamos conhecer
 
 ```
 -sn - detecção de hosts vivos
@@ -47,21 +55,20 @@ opções default, que precisamos conhecer
 ```
 
 # nível de agressividade
-
-- -T0 - usado para previinir IDS
-- -T1 - espera cerca de 15s durance o scan
-- -T2 - espera cerca de 4s duranca o scan
-- -T3 - scan normal
-- -T4 - scan rápido
-- -T5 - scan rápido (porém barulhendo, facilmente detectável por qlqr IDS e IPS)
-
+```
+-T0 - usado para previinir IDS
+-T1 - espera cerca de 15s durance o scan
+-T2 - espera cerca de 4s duranca o scan
+-T3 - scan normal
+-T4 - scan rápido
+-T5 - scan rápido (porém barulhendo, facilmente detectável por qlqr IDS e IPS)
+```
 =================================================================================================
 
 
 # Consumo de rede em PORT SCAN
 
-(utilizando iptables para pegar esses resultados (iptables -Z para limpar dados de pacotes)
-
+(utilizando iptables para pegar esses resultados (```iptables -Z``` para limpar a chain de dados de pacotes)
 
 scan com sT (tcp connect) envia 4 pacotes IN e 4 pacotes OUT e tem o tamanho de 224 bytes
 
@@ -77,8 +84,9 @@ ambiguidade em relação aos resultados, ele não consegue te dizer se está abe
 opção a ser usada é:
 
 ```
-nmap -v -sUV -p 53 -Pn 192.168.01 - Assim ele trás informações sobre a versão do serviço se ele conseguir descobrir
+nmap -v -sUV -p 53 -Pn 192.168.01
 ```
+Assim ele trás informações sobre a versão do serviço, caso ele consiga descobrir
 
 =================================================================================================
 
@@ -90,9 +98,9 @@ nmap -v sn 192.168.0.0/24 -oG hosts.txt
 nmap -v -sS --open -p 80 -Pn -iL ips.txt -oG web.txt
 ```
 
-dica: -p http* (encontra todos os serviços web no range determinado)
+dica: ```-p http*``` (encontra todos os serviços web no range determinado)
 
-dica: -p --top-ports=5 (encontra as 5 principais portas varridas)
+dica: ```-p --top-ports=5``` (encontra as 5 principais portas varridas)
 
 
 =================================================================================================
