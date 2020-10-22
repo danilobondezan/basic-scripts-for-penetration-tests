@@ -65,21 +65,23 @@ Opções default, que precisamos conhecer
 ```
 =================================================================================================
 
-
 # Consumo de rede em PORT SCAN
 
-(utilizando iptables para pegar esses resultados (```iptables -Z``` para limpar a chain de dados de pacotes)
+para listar os resultados
+```iptables -L```
 
-scan com sT (tcp connect) envia 4 pacotes IN e 4 pacotes OUT e tem o tamanho de 224 bytes
+para limpar a chain de dados de pacotes
+```iptables -Z```
 
-scan com sG (halp open scan) envia 3 pacotes IN e 3 pacotes OUT e tem o tamanho de 128 byes
+scan com ```-sT``` (tcp connect) envia 4 pacotes IN e 4 pacotes OUT e tem o tamanho de 224 bytes
 
+scan com ```-sG``` (half open scan) envia 3 pacotes IN e 3 pacotes OUT e tem o tamanho de 128 byes
 
 =================================================================================================
 
 ## UDP scan
 
-ambiguidade em relação aos resultados, ele não consegue te dizer se está aberta ou filtras e vice versa
+ambiguidade em relação aos resultados, ele não consegue te dizer se está aberta ou filtrada e vice versa
 
 opção a ser usada é:
 
@@ -126,8 +128,9 @@ ex:
 ```
 nc -v localhost 22
 Connection to localhost 22 port [tcp/ssh] succeeded!
-SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3 <<<< banner do ssh mostrando a versão que está rodando
+SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
 ```
+banner do ssh mostrando a versão que está rodando
 
 ================================================================================================
 
@@ -209,6 +212,6 @@ nc -p53 -vn 192.168.0.1 8180 (by-pass usando portas liberadas)
 
 ex para pegar o que roda em um server web remoto
 ```
-nc -p53 -vn 192.168.0.1 8180 > /var/www/html/index2.html (dirótio local do apache)
+nc -p53 -vn 192.168.0.1 8180 > /var/www/html/index2.html (diretóio local do apache)
 GET / HTTP/1.0
 ```
